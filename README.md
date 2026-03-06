@@ -1,53 +1,50 @@
-# C++ Threading Cheatsheet
-
-Quick reference for threading and async patterns in C++
+# C++ Coroutines Cheatsheet
 
 ## Setup
-1. **Compiler**: MSVC (v143) or any C++17+ compatible compiler
-2. **IDE**: VS Code with CMake extension
-3. **Build**: CMake (no external dependencies needed)
+1. **Compiler**: MSVC (v143) or any C++20+ compatible compiler
+2. **Flags**: `/await` for MSVC, `-fcoroutines` for GCC/Clang
+3. **Headers**: `<coroutine>`
 
 ## Cases Overview
 
-### 1️⃣ Basic Timing
-- `this_thread::sleep_for`
-- Measures sleep duration accurately
+### 1️⃣ Basic Suspension
+- `co_await` demonstration
+- `suspend_always` vs `suspend_never`
+- Coroutine state machine basics
 
-### 2️⃣ Synchronization Basics
-- `mutex` + `lock_guard`
-- `atomic` counter
-- Regular (unsafe) counter
+### 2️⃣ Generator Pattern
+- `co_yield` implementation
+- Lazy value generation
+- Coroutine handle management
 
-### 3️⃣ Advanced Synchronization
-- `unique_lock` with condition variable
-- `try_lock` attempts
-- Thread signaling pattern
+### 3️⃣ Async Simulation
+- Simulating async operations
+- Suspension points
+- Return value handling
 
-### 4️⃣ Non-blocking Locks
-- `try_lock` with retry logic
-- Critical vs non-critical work sections
-- Lock acquisition attempts
+### 4️⃣ Coroutine Chains
+- Multiple coroutine coordination
+- Handle management patterns
+- Suspension/resumption flow
 
-### 5️⃣ Async Patterns
-- `promise`/`future` for thread communication
-- `async` with launch policies
-- Multiple parallel tasks
+### 5️⃣ Error Handling
+- Exception propagation
+- `unhandled_exception` in promise
+- Exception_ptr usage
 
-### 6️⃣ Detach vs Async
-- `thread.detach()` limitations
-- `async` advantages (return values, completion tracking)
+### 6️⃣ Coroutine vs Threads
+- Lightweight vs OS threads
+- Suspension vs preemption
+- Use case comparisons
 
-## Usage
-1. Open in VS Code
-2. Build with CMake
-3. Run executable - all cases execute sequentially
+## Key Types
+- `coroutine_handle`: Controls coroutine execution
+- `suspend_always`: Always suspends
+- `suspend_never`: Never suspends
+- `promise_type`: Required interface for coroutines
 
-## Key Shortcuts
-- Case 1: Basic timing
-- Case 2: Shared data protection
-- Case 3: Thread coordination
-- Case 4: Non-blocking approaches
-- Case 5: Async operations
-- Case 6: Fire-and-forget vs managed
-
-> **Note**: This is meant as a quick reference - the code is self-documenting with clear output markers.
+## Usage Patterns
+1. Generators: Lazy value sequences
+2. Async Tasks: Non-blocking operations
+3. State Machines: Suspension as state transitions
+4. Pipelines: Chained processing

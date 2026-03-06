@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(cmake_thread_async LANGUAGES CXX)
+project(cmake_coroutine LANGUAGES CXX)
 
 # C++ settings
 set(CMAKE_CXX_STANDARD 20)
